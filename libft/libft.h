@@ -45,7 +45,7 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-void			ft_bzero(void *s, size_t n);
+void			*ft_bzero(void *s, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memccpy(void *dst, const void *src, int c, size_t n);
@@ -114,13 +114,15 @@ void			*ft_lstputchar(t_list *lst, int n);
 void			*ft_lstputchar(t_list *lst, int n);
 void			*ft_lstputstr(t_list *lst, int n);
 int				get_next_line(const int fd, char **line, int reset);
-char			**ft_realloc_tab(char **old_tab, char *new_entry);
-void			ft_free_tab2(char **tab);
-size_t			ft_tablen(char **tab);
+char			**ft_realloc_array(char **old_array, char *new_entry);
+void			ft_free_array2(char **array);
+size_t			ft_arraylen(char **array);
 int				bigger(size_t a, size_t b);
+void		s_cpy(char *dest, size_t *i, char const *s);
+int			smaller(size_t a, size_t b);
 int				val_abs(int nbr);
-int				smaller(size_t a, size_t b);
-size_t			ft_strclen(const char *str, char c);
+size_t		ft_strclen(const char *str, char c);
 char			*ft_strjoin_free(char **s1, char **s2, int i);
+char		*ft_strndup(const char *s1, size_t len);
 
 #endif
