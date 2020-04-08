@@ -20,13 +20,13 @@ ROOT_FILES = main.c
 
 TERMCAPS_DIR = termcaps
 TERMCAPS_FILES = init.c termcaps_controler.c move.c prompt.c key.c history.c \
-					edition.c home_end.c maj_key.c modify_command.c print_edition_mode.c \
-					utils.c print_command.c
+	edition.c home_end.c maj_key.c modify_command.c print_edition_mode.c \
+	utils.c print_command.c
 QUENTIN_DIR = quentin
 QUENTIN_FILES = cd.c display.c execute_main.c input_main.c input_tools.c \
-						redirect.c setenv.c sh21.c testing.c tokens_gather.c tokens_list.c \
-						tokens_main.c tokens_split.c tokens_tools.c util_env.c util_pwd.c \
-						util_array.c
+	redirect.c setenv.c sh21.c testing.c tokens_gather.c tokens_list.c \
+	tokens_main.c tokens_split.c tokens_tools.c util_env.c util_pwd.c \
+	util_array.c redirect_list.c 
 
 
 SRC_FILES = $(ROOT_FILES)
@@ -37,7 +37,7 @@ SRC  = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ  = $(addprefix $(OBJ_DIR)/, $(subst .c,.o, $(SRC_FILES)))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra 
 
 LIB = -L libft/ -lft
 LIBFT_INC = libft/includes

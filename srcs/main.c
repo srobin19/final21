@@ -1,7 +1,5 @@
 #include "21sh.h"
 
-
-
 int			main(void)
 {
 	extern char	**environ;
@@ -13,6 +11,5 @@ int			main(void)
 	if (!(env = get_env(environ)))
 		return (-1);
 	title();
-	prompt_loop(&env, &pwd);
 	return (0);
 }

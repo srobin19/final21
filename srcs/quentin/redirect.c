@@ -64,11 +64,25 @@ static int	get_right_fd(char *r_value, char *curr_c)
 		return (-1);
 	return (fd);
 }
+ void	reset_redirections(t_dupsave *track)
+{
+	t_dupsave	*curr;
 
-static void	apply_redirection(t_tokens *pnode)
+	if (!track)
+		return ;
+	curr = track;
+	while (curr)
+	{
+		dup2(curr->fd_save, curr->fd_l);
+		curr = curr->next;
+	}
+}
+
+static void	apply_redirection(t_tokens *pnode, t_dupsave *track)
 {
 	int	fd_l;
 	int	fd_r;
+	int	fd_save;
 	char	*curr_c;
 
 	if (pnode->next == NULL)
@@ -83,18 +97,25 @@ static void	apply_redirection(t_tokens *pnode)
 	if (fd_r == -2)
 		close(fd_l);
 	else
+	{
+		fd_save = dup(fd_l);
 		dup2(fd_r, fd_l);
+		add_track_node(track, fd_l, fd_save);
+	}
 }
 
-void		redirect(t_tokens *pnode)
+t_dupsave	*redirect(t_tokens *pnode)
 {
 	t_tokens *curr_tok;
+	t_dupsave *track;
 
 	curr_tok = pnode;
+	track = NULL;
 	while (curr_tok)
 	{
 		if (curr_tok->subtype == REDI)
-			apply_redirection(curr_tok);
+			apply_redirection(curr_tok, track);
 		curr_tok = curr_tok->next;
 	}
+	return (track);
 }

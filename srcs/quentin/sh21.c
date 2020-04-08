@@ -46,19 +46,17 @@ int	prompt_loop(char ***env, t_pwd *pwd)
 	init_termcaps(&termcaps);
 	if (!(g_shell = malloc(sizeof(*g_shell))))
 	 exit(-1);
-	cdms = NULL;
+	cmds = NULL;
 	g_shell->termcaps = &termcaps;
-
 	while (1)
 	{
 		prompt();
 		g_shell->termcaps->i = 0;
-    signal(SIGINT, sig);
+    		signal(SIGINT, sig);
 		ft_putstr("\n");
-		if (!(cmds = trim_termcaps(core_termcaps(&termcaps, 1));
+		if (!(cmds = trim_termcaps(core_termcaps(&termcaps, 1))))
 			continue ;
 		toks_all = lexer(cmds, *env);
-		display_ll(toks_all);
 		toks_grp = split_tokens(toks_all, SMCL);
 		curr_grp = toks_grp;
 		while (*curr_grp)

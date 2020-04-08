@@ -41,6 +41,7 @@
 # define REDI 1
 # define PIPE 2
 # define SMCL 3
+
 typedef struct	s_tokens
 {
 	int			type;
@@ -49,6 +50,13 @@ typedef struct	s_tokens
 	struct s_tokens		*next;
 
 }		t_tokens;
+
+typedef struct	s_dupsave
+{
+	int			fd_l;
+	int			fd_save;
+	struct s_dupsave	*next;
+}		t_dupsave;
 
 typedef struct	s_pwd
 {
@@ -84,10 +92,10 @@ int			apply_output_redir
 int			apply_input_redir
 			(char *operand, char *l_value, char *r_value);
 /*
-** redirect_parse.c
+** *edirect_parse.c
 */
-void		redirect(t_tokens *pnode);
-
+t_dupsave		*redirect(t_tokens *pnode);
+void			reset_redirections(t_dupsave *track);
 /*
 ** tokens_gather.c
 */
@@ -176,7 +184,7 @@ void		free_pwd(t_pwd *pwd);
 /*
 ** execute.c
 */
-void		execute_pseq(t_tokens **pseq, t_pwd *pwd, char ***env);
+int		execute_pseq(t_tokens **pseq, t_pwd *pwd, char ***env);
 
 /*
 ** execute.c
@@ -184,4 +192,5 @@ void		execute_pseq(t_tokens **pseq, t_pwd *pwd, char ***env);
 void		cd(char **cmd, char ***env, t_pwd *pwd);
 int			prompt_loop(char ***env, t_pwd *pwd);
 
+t_dupsave	*add_track_node(t_dupsave *list, int fdl, int fdsave);
 #endif
