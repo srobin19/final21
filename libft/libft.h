@@ -124,5 +124,6 @@ int				val_abs(int nbr);
 size_t		ft_strclen(const char *str, char c);
 char			*ft_strjoin_free(char **s1, char **s2, int i);
 char		*ft_strndup(const char *s1, size_t len);
+int		ft_tablen(char **table);
 
 #endif

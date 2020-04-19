@@ -81,7 +81,7 @@ static int		update_inhibitors(int *esc, int *quoted, char curr_c)
 		return (0);
 }
 
-static void		get_operator(char **curr_c, t_tokens *toks)
+static t_tokens		*get_operator(char **curr_c, t_tokens *toks)
 {
 	char		*curr;
 	t_tokens	*working_tok;
@@ -96,6 +96,7 @@ static void		get_operator(char **curr_c, t_tokens *toks)
 		curr++;
 	}
 	*curr_c = curr - 1;
+	return (toks);
 }
 
 char	*get_var_name(char *curr_c)
@@ -199,7 +200,7 @@ static t_tokens	*get_tokens(char *input, t_tokens *toks, char **env)
 		else if (!esc && quoted != 1 && expand(&curr_c, env, &input))
 			;
 		else if (!esc && !quoted && is_operator(curr_c) && (!(word = 0)))
-			get_operator(&curr_c, toks);
+			toks = get_operator(&curr_c, toks);
 		else if (!esc && !quoted && is_blank_char(*curr_c))
 			word = 0;
 		else if (word)

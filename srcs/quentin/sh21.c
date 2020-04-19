@@ -57,6 +57,7 @@ int	prompt_loop(char ***env, t_pwd *pwd)
 		if (!(cmds = trim_termcaps(core_termcaps(&termcaps, 1))))
 			continue ;
 		toks_all = lexer(cmds, *env);
+		display_ll(toks_all);
 		toks_grp = split_tokens(toks_all, SMCL);
 		curr_grp = toks_grp;
 		while (*curr_grp)
@@ -65,5 +66,6 @@ int	prompt_loop(char ***env, t_pwd *pwd)
 			curr_grp++;
 		}
 	}
+	printf("prompt_loop end\n");
 	return (1);
 }

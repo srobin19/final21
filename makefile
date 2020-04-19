@@ -37,7 +37,7 @@ SRC  = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ  = $(addprefix $(OBJ_DIR)/, $(subst .c,.o, $(SRC_FILES)))
 
 CC = gcc
-CFLAGS = -Wall -Wextra 
+CFLAGS = -Wall -Wextra -g -O0 
 
 LIB = -L libft/ -lft
 LIBFT_INC = libft/includes

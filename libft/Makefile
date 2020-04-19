@@ -32,7 +32,7 @@ SRCS = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
 	   ft_isupper.c ft_islower.c ft_ccount.c ft_lstcount.c ft_isspacer.c \
 	   get_next_line.c ft_realloc_array.c ft_free_array2.c ft_arraylen.c \
 		 bigger.c ft_str3join.c smaller.c val_abs.c ft_strclen.c \
-		 ft_strjoin_free.c ft_strndup.c
+		 ft_strjoin_free.c ft_strndup.c ft_tablen.c
 OBJS = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o \
 	   ft_memmove.o ft_memchr.o ft_memcmp.o \
 	   ft_strlen.o ft_strdup.o ft_strcpy.o ft_strncpy.o \
@@ -52,7 +52,7 @@ OBJS = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o \
 	   ft_isupper.o ft_islower.o ft_ccount.o ft_lstcount.o ft_isspacer.o \
 	   get_next_line.o ft_realloc_array.o ft_free_array2.o ft_arraylen.o \
 		 bigger.o ft_str3join.o smaller.o val_abs.o ft_strclen.o \
-		 ft_strjoin_free.o ft_strndup.o
+		 ft_strjoin_free.o ft_strndup.o ft_tablen.o
 
 .PHONY: all clean fclean re
 

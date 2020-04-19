@@ -25,6 +25,7 @@ static void	execute_binary(t_tokens *pnode, char **env)
 
 	ft_strcmp(env[0], env[0]);
 	full_cmd = gather_cmds_tokens(pnode);
+	redirect(pnode);
 	execvp(full_cmd[0], full_cmd);
 	perror("exec error: ");
 	exit(EXIT_FAILURE);
@@ -53,43 +54,47 @@ static void	pipe_and_execute(int p[2], t_tokens *curr, char **env)
 	}
 }
 
-static int	builtin(t_tokens *pnode, char ***env, t_pwd *pwd)
+static int	is_builtin(t_tokens *pnode, char ***env, t_pwd *pwd)
 {
 	char	**full_cmd;
+	char	isbuiltin;
 
+	isbuiltin = 0;
 	full_cmd = gather_cmds_tokens(pnode);
 	if (!ft_strcmp(full_cmd[0], "exit"))
-		return (1);
+		isbuiltin = 1;
 	else if (!ft_strcmp(full_cmd[0], "echo"))
-		return (1);
+		isbuiltin = 2;
 	else if (!ft_strcmp(full_cmd[0], "cd"))
 	{
+		printf("doing cd..\n");
+		isbuiltin = 3;
 		cd(full_cmd, env, pwd);
-		return (1);
 	}
 	else if (!ft_strcmp(full_cmd[0], "env"))
-		return (1);
+		isbuiltin = 4;
 	else if (!ft_strcmp(full_cmd[0], "setenv"))
 	{
+		isbuiltin = 5;
 		set_env(full_cmd, env);
-		return (1);
 	}
 	else if (!ft_strcmp(full_cmd[0], "unsetenv"))
-		return (1);
+		isbuiltin = 6;
 	else if (!ft_strcmp(full_cmd[0], "type"))
-		return (1);
-	else
-		return(0);
+		isbuiltin = 7;
+	return (isbuiltin);
 }
 
 static int	test_and_execute(t_tokens **pnode, char ***env, t_pwd *pwd, int p[2])
 {
-	int builtin_ret;
 	t_dupsave *track;
 
-	track = redirect(*pnode);
-	if (builtin(*pnode, env, pwd))
-		reset_redirections(track);
+	track = NULL;
+	if (is_builtin(*pnode, env, pwd))
+	{
+		track = redirect(*pnode);
+		reset_redirections(track);	
+	}
 	else if (*(pnode + 1))
 		pipe_and_execute(p, *pnode, *env);
 	else

@@ -85,11 +85,13 @@ static void	apply_redirection(t_tokens *pnode, t_dupsave *track)
 	int	fd_save;
 	char	*curr_c;
 
+	printf("apply_redirection IN\n");
 	if (pnode->next == NULL)
 	{
 		ft_putendl_fd("redirection error: missing R_VALUE", 2);
 		return ;
 	}
+	printf("pnode string: %s\n", pnode->string);
 	curr_c = pnode->string;
 	fd_l = get_left_fd(&curr_c);
 	if ((fd_r = get_right_fd(pnode->next->string, curr_c)) == -1)
@@ -113,6 +115,7 @@ t_dupsave	*redirect(t_tokens *pnode)
 	track = NULL;
 	while (curr_tok)
 	{
+		printf("TOKEN: %s\n", curr_tok->string);
 		if (curr_tok->subtype == REDI)
 			apply_redirection(curr_tok, track);
 		curr_tok = curr_tok->next;

@@ -18,6 +18,7 @@ void	display_ll(t_tokens *toks)
 	t_tokens	*curr_t;
 	int		n;
 
+	printf("DLL toks addr: %p\n", toks);
 	if (!toks)
 		return ;
 	n = 0;
