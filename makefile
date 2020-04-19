@@ -26,7 +26,7 @@ QUENTIN_DIR = quentin
 QUENTIN_FILES = cd.c display.c execute_main.c input_main.c input_tools.c \
 	redirect.c setenv.c sh21.c testing.c tokens_gather.c tokens_list.c \
 	tokens_main.c tokens_split.c tokens_tools.c util_env.c util_pwd.c \
-	util_array.c redirect_list.c 
+	util_array.c redirect_list.c unsetenv.c echo.c 
 
 
 SRC_FILES = $(ROOT_FILES)

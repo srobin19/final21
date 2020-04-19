@@ -64,22 +64,30 @@ static int	is_builtin(t_tokens *pnode, char ***env, t_pwd *pwd)
 	if (!ft_strcmp(full_cmd[0], "exit"))
 		isbuiltin = 1;
 	else if (!ft_strcmp(full_cmd[0], "echo"))
+	{
 		isbuiltin = 2;
+		echo (full_cmd);
+	}
 	else if (!ft_strcmp(full_cmd[0], "cd"))
 	{
-		printf("doing cd..\n");
 		isbuiltin = 3;
 		cd(full_cmd, env, pwd);
 	}
 	else if (!ft_strcmp(full_cmd[0], "env"))
+	{
 		isbuiltin = 4;
+		printenv(*env);
+	}
 	else if (!ft_strcmp(full_cmd[0], "setenv"))
 	{
 		isbuiltin = 5;
 		set_env(full_cmd, env);
 	}
 	else if (!ft_strcmp(full_cmd[0], "unsetenv"))
+	{
 		isbuiltin = 6;
+		unset_env(full_cmd, env);
+	}
 	else if (!ft_strcmp(full_cmd[0], "type"))
 		isbuiltin = 7;
 	return (isbuiltin);

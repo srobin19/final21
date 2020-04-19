@@ -193,4 +193,6 @@ void		cd(char **cmd, char ***env, t_pwd *pwd);
 int			prompt_loop(char ***env, t_pwd *pwd);
 
 t_dupsave	*add_track_node(t_dupsave *list, int fdl, int fdsave);
+char		**unset_env(char **cmd, char ***env);
+int		echo(char **cmd);
 #endif
