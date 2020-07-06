@@ -74,6 +74,7 @@ static int	get_right_fd(char *r_value, char *curr_c)
 	while (curr)
 	{
 		dup2(curr->fd_save, curr->fd_l);
+		close(curr->fd_save);
 		curr = curr->next;
 	}
 }

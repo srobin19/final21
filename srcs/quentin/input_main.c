@@ -64,6 +64,9 @@ static int		is_input_done(char *str)
 	return (1);
 }
 
+//This functions uses get_next_line to get a line from the user and then
+//check if the input is done, that is to say if all quotes are closed
+//(including no backslash at the end of the line)
 static char		*get_all_lines(void)
 {
 	char		*full_input;
@@ -89,6 +92,8 @@ static char		*get_all_lines(void)
 	return (full_input);
 }
 
+//main function that gets user inputs using other functions then returns it
+//as a string.
 char			*get_input(void)
 {
 	char		*input;

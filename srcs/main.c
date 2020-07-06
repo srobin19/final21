@@ -1,5 +1,10 @@
 #include "21sh.h"
 
+
+// - create init_pwd (to keep track of the current working directory)
+// - get current environment and copy it
+// - display the welcome text of the shell
+// - launch te prompt loop (see sh21.c)
 int			main(void)
 {
 	extern char	**environ;

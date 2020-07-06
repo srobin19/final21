@@ -81,6 +81,9 @@ static int		update_inhibitors(int *esc, int *quoted, char curr_c)
 		return (0);
 }
 
+//This function is called when get_tokens detects an operator, which
+//would here be a redirections, since pipes and semicolumns are taken
+//care of earlier in the program.
 static t_tokens		*get_operator(char **curr_c, t_tokens *toks)
 {
 	char		*curr;
@@ -160,6 +163,11 @@ char	*replace_tilde(char *input, char **curr_c, char *var_val)
 	return(new);
 }
 
+//This function is called when get_tokens detect an expandable 'word',
+//so either a [$] or a [~] character. It will then replace the tilde or 
+//variable name by the fully expanded word into the string. Be aware that an
+//expansion does not consitute a new token, it just needs to be expanded before
+//tokenization.
 int	expand(char **curr_c, char **env, char **input)
 {
 	int	ret;
@@ -186,6 +194,12 @@ int	expand(char **curr_c, char **env, char **input)
 	return (0);
 }
 
+//This function will read the string character by character, and call the right
+//function to add it to either a new or the current token. It follows the logic
+//stated in the posix sh standard, in the same order.
+//It takes quoting into account when relevant. Quotes are NOT tokens!
+//The loop detect the type of the next token, extract it, and put the cursor
+//after it in the raw input.
 static t_tokens	*get_tokens(char *input, t_tokens *toks, char **env)
 {
 	int		esc = 0;
@@ -212,6 +226,8 @@ static t_tokens	*get_tokens(char *input, t_tokens *toks, char **env)
 	return (toks);
 }
 
+//This is the main function that takes the user's input as a raw string
+//and do syntaxic analysis to returns a lexed list of tokens from it.
 t_tokens		*lexer(char *input, char **env)
 {
 	t_tokens	*toks;
